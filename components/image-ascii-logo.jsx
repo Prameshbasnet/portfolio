@@ -26,4 +26,3 @@ about  education  skills  experience  projects  certifications  contact
     </div>
   )
 }
-

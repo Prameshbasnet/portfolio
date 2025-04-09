@@ -44,4 +44,3 @@ export function TypingEffect({ text, speed = 50, delay = 0, onComplete, classNam
     </span>
   )
 }
-

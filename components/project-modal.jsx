@@ -75,4 +75,3 @@ export function ProjectModal({ project, isOpen, onClose }) {
     </Dialog>
   )
 }
-

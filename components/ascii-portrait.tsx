@@ -82,4 +82,3 @@ export function AsciiPortrait({ width = 60, height = 80 }: AsciiPortraitProps) {
     </div>
   )
 }
-

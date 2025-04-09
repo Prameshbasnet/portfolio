@@ -1,0 +1,55 @@
+export const projectsData = [
+  {
+    id: "efcu",
+    title: "Online Digital Member Onboarding Solution (EFCU)",
+    description:
+      "A comprehensive online platform enabling users to open accounts and apply for loans (individual and business).",
+    technologies: [".NET", "Next.js", "AWS Cognito", "AWS S3", "Twilio", "DocuSign"],
+    features: [
+      "Secure authentication mechanism using AWS Cognito",
+      "Seamless file storage via AWS S3",
+      "OTP-based verification with Twilio",
+      "Electronic document signatures with DocuSign",
+      "Individual and business loan application workflows",
+      "Responsive design for all devices",
+    ],
+    image: "/placeholder.svg?height=300&width=600",
+    demoUrl: "https://example.com/efcu-demo",
+    repoUrl: "https://github.com/prameshbasnet1/efcu-onboarding",
+  },
+  {
+    id: "pbm",
+    title: "Prabhu Budget Management System (PBM)",
+    description:
+      "Robust backend systems for budget tracking and financial management with an intuitive React dashboard.",
+    technologies: [".NET", "React", "PostgreSQL", "RESTful API"],
+    features: [
+      "Budget tracking and visualization",
+      "Financial reporting and analytics",
+      "User role management",
+      "Expense categorization",
+      "Budget forecasting",
+      "Data export capabilities",
+    ],
+    image: "/placeholder.svg?height=300&width=600",
+    demoUrl: "https://example.com/pbm-demo",
+    repoUrl: "https://github.com/prameshbasnet1/pbm-system",
+  },
+  {
+    id: "kiosk",
+    title: "Kiosk Application",
+    description: "A self-service kiosk application for cheque deposit, account statements, and account management.",
+    technologies: ["Flutter", "React", "Windows API"],
+    features: [
+      "Cheque deposit functionality",
+      "Account statement generation",
+      "Old-to-new account number migration",
+      "Admin dashboard for system management",
+      "Reporting functionalities",
+      "User activity tracking",
+    ],
+    image: "/placeholder.svg?height=300&width=600",
+    demoUrl: "https://example.com/kiosk-demo",
+    repoUrl: "https://github.com/prameshbasnet1/kiosk-app",
+  },
+]

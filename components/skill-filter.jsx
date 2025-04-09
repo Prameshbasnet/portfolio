@@ -52,4 +52,3 @@ export function SkillFilter({ skills, onFilter }) {
     </div>
   )
 }
-
