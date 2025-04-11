@@ -13,7 +13,6 @@ import { ContactSection } from "@/components/sections/contact-section"
 import { ResumeGenerator } from "@/components/resume-generator"
 import { ContactForm } from "@/components/contact-form"
 import { TerminalIcon, ChevronRight, X } from "lucide-react"
-import { SecurityScanSection } from "@/components/sections/security-scan-section"
 
 // Project details for the modal
 const projectsData = [
@@ -110,38 +109,12 @@ export default function Terminal() {
       "project:pbm",
       "project:kiosk",
     ],
-    system: ["clear", "echo", "pwd", "whoami", "date", "help", "man", "uname", "history", "neofetch", "banner"],
-    tools: [
-      "weather",
-      "ip",
-      "crypto",
-      "news",
-      "quote",
-      "joke",
-      "scan",
-      "matrix",
-      "fortune",
-      "calc",
-      "timer",
-      "ascii-art",
-      "colors",
-      "figlet",
-      "cowsay",
-      "calendar",
-      "todo",
-      "encrypt",
-      "decrypt",
-      "qrcode",
-      "morse",
-      "binary",
-      "hex",
-      "uuid",
-      "password",
-    ],
+    system: ["clear", "echo", "pwd", "whoami", "help"],
+    fileSystem: ["ls", "cd", "cat"],
   }
 
   // Flatten commands for autocomplete
-  const commands = [...commandCategories.portfolio, ...commandCategories.system, ...commandCategories.tools]
+  const commands = [...commandCategories.portfolio, ...commandCategories.system, ...commandCategories.fileSystem]
 
   const inputRef = useRef(null)
   const terminalRef = useRef(null)
@@ -858,93 +831,18 @@ export default function Terminal() {
               <div>
                 <span className="text-yellow-500">whoami</span> - Display user information
               </div>
-              <div>
-                <span className="text-yellow-500">date</span> - Display current date and time
-              </div>
-              <div>
-                <span className="text-yellow-500">history</span> - View command history
-              </div>
-              <div>
-                <span className="text-yellow-500">uname</span> - Display system information
-              </div>
-              <div>
-                <span className="text-yellow-500">man [command]</span> - Display command manual
-              </div>
-              <div>
-                <span className="text-yellow-500">neofetch</span> - Show system info
-              </div>
-              <div>
-                <span className="text-yellow-500">banner</span> - Display ASCII banner
-              </div>
             </div>
 
-            <p className="font-bold text-yellow-500 mt-4">Tools & Utilities:</p>
+            <p className="font-bold text-yellow-500 mt-4">File System Commands:</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 ml-4">
               <div>
-                <span className="text-yellow-500">weather</span> - Show weather information
+                <span className="text-yellow-500">ls</span> - List directory contents
               </div>
               <div>
-                <span className="text-yellow-500">ip</span> - Show IP information
+                <span className="text-yellow-500">cd [dir]</span> - Change directory
               </div>
               <div>
-                <span className="text-yellow-500">crypto</span> - Show cryptocurrency prices
-              </div>
-              <div>
-                <span className="text-yellow-500">news</span> - Show latest news
-              </div>
-              <div>
-                <span className="text-yellow-500">quote</span> - Show a random quote
-              </div>
-              <div>
-                <span className="text-yellow-500">joke</span> - Tell a programming joke
-              </div>
-              <div>
-                <span className="text-yellow-500">scan</span> - Run a security scan
-              </div>
-              <div>
-                <span className="text-yellow-500">matrix</span> - Display matrix effect
-              </div>
-              <div>
-                <span className="text-yellow-500">fortune</span> - Show a random fortune
-              </div>
-              <div>
-                <span className="text-yellow-500">calc [expression]</span> - Calculate expression
-              </div>
-              <div>
-                <span className="text-yellow-500">timer [seconds]</span> - Set a countdown timer
-              </div>
-              <div>
-                <span className="text-yellow-500">ascii-art</span> - Display random ASCII art
-              </div>
-              <div>
-                <span className="text-yellow-500">colors</span> - Show terminal colors
-              </div>
-              <div>
-                <span className="text-yellow-500">figlet [text]</span> - ASCII text art
-              </div>
-              <div>
-                <span className="text-yellow-500">cowsay [text]</span> - ASCII cow says text
-              </div>
-              <div>
-                <span className="text-yellow-500">calendar</span> - Show current month calendar
-              </div>
-              <div>
-                <span className="text-yellow-500">qrcode [text]</span> - Generate QR code
-              </div>
-              <div>
-                <span className="text-yellow-500">morse [text]</span> - Convert text to Morse code
-              </div>
-              <div>
-                <span className="text-yellow-500">binary [text]</span> - Convert text to binary
-              </div>
-              <div>
-                <span className="text-yellow-500">hex [text]</span> - Convert text to hexadecimal
-              </div>
-              <div>
-                <span className="text-yellow-500">uuid</span> - Generate a UUID
-              </div>
-              <div>
-                <span className="text-yellow-500">password [length]</span> - Generate a password
+                <span className="text-yellow-500">cat [file]</span> - Display file contents
               </div>
             </div>
 
@@ -1062,498 +960,42 @@ export default function Terminal() {
         setCurrentSection(null)
         break
 
-      case "date":
-        output = <p className="text-green-500 font-mono">{new Date().toString()}</p>
-        setCurrentSection(null)
-        break
-
-      case "history":
+      case "ls":
         output = (
           <div className="text-green-500 font-mono">
-            <div className="space-y-1">
-              {commandHistory.map(
-                (cmd, idx) =>
-                  cmd.input && (
-                    <div key={idx} className="flex">
-                      <span className="text-gray-500 w-8 text-right mr-2">{idx + 1}</span>
-                      <span>{cmd.input}</span>
-                    </div>
-                  ),
-              )}
+            <p>Contents of /home/pramesh:</p>
+            <div className="grid grid-cols-4 gap-2 mt-2">
+              <div className="text-blue-400">projects/</div>
+              <div className="text-blue-400">documents/</div>
+              <div className="text-blue-400">images/</div>
+              <div className="text-green-300">readme.txt</div>
             </div>
           </div>
         )
         setCurrentSection(null)
         break
 
-      case "uname":
-        output = (
-          <div className="text-green-500 font-mono">
-            <p>Portfolio OS 1.0.0 pramesh-terminal x86_64</p>
-          </div>
-        )
+      case "cd":
+        output = <p className="text-green-500 font-mono">Directory changed</p>
         setCurrentSection(null)
         break
 
-      case "man":
+      case "cat":
         if (commandParts.length < 2) {
-          output = <p className="text-red-500 font-mono">man: Missing command name</p>
+          output = <p className="text-red-500 font-mono">cat: Missing file operand</p>
         } else {
-          const cmdName = commandParts[1]
-          const manPages = {
-            about: "Display information about Pramesh Basnet",
-            skills: "List technical skills and proficiency levels",
-            projects: "Show portfolio projects with details",
-            contact: "Display contact information",
-            clear: "Clear the terminal screen",
-            help: "Display available commands",
-            weather: "Show current weather information",
-            crypto: "Display cryptocurrency prices",
-            scan: "Run a simulated security vulnerability scan",
-            matrix: "Display a Matrix-like animation in the terminal",
-            calc: "Calculate mathematical expressions",
-            "ascii-art": "Display random ASCII art",
-            cowsay: "Display an ASCII cow saying the provided text",
-            figlet: "Display text as ASCII art",
-            morse: "Convert text to Morse code",
-            binary: "Convert text to binary",
-            hex: "Convert text to hexadecimal",
-            uuid: "Generate a random UUID",
-            password: "Generate a random secure password",
-          }
-
-          if (manPages[cmdName]) {
-            output = (
-              <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-                <p className="font-bold text-white uppercase mb-2">Manual: {cmdName}</p>
-                <p className="mb-2">NAME</p>
-                <p className="ml-4 mb-2">
-                  {cmdName} - {manPages[cmdName]}
-                </p>
-                <p className="mb-2">SYNOPSIS</p>
-                <p className="ml-4 mb-2 font-mono">
-                  {cmdName}{" "}
-                  {cmdName === "calc"
-                    ? "[expression]"
-                    : cmdName === "cowsay" ||
-                        cmdName === "figlet" ||
-                        cmdName === "morse" ||
-                        cmdName === "binary" ||
-                        cmdName === "hex"
-                      ? "[text]"
-                      : cmdName === "password"
-                        ? "[length]"
-                        : ""}
-                </p>
-                <p className="mb-2">DESCRIPTION</p>
-                <p className="ml-4">{manPages[cmdName]}</p>
-              </div>
-            )
-          } else {
-            output = <p className="text-red-500 font-mono">man: No manual entry for {cmdName}</p>
-          }
-        }
-        setCurrentSection(null)
-        break
-
-      case "weather":
-        const weather = fetchWeatherData()
-        setWeatherData(weather)
-        output = (
-          <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-            <p className="font-bold text-white mb-2">Weather for {weather.location}</p>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <p>Temperature: {weather.temperature}</p>
-                <p>Condition: {weather.condition}</p>
-                <p>Humidity: {weather.humidity}</p>
-                <p>Wind: {weather.wind}</p>
-              </div>
-              <div>
-                <p className="font-bold">Forecast:</p>
-                {weather.forecast.map((day, index) => (
-                  <p key={index}>
-                    {day.day}: {day.temp} - {day.condition}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "ip":
-        const ip = fetchIpInfo()
-        setIpInfo(ip)
-        output = (
-          <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-            <p className="font-bold text-white mb-2">IP Information</p>
-            <p>IP: {ip.ip}</p>
-            <p>
-              Location: {ip.city}, {ip.region}, {ip.country}
-            </p>
-            <p>Coordinates: {ip.loc}</p>
-            <p>ISP: {ip.org}</p>
-            <p>Postal Code: {ip.postal}</p>
-            <p>Timezone: {ip.timezone}</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "crypto":
-        const crypto = fetchCryptoData()
-        setCryptoData(crypto)
-        output = (
-          <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-            <p className="font-bold text-white mb-2">Cryptocurrency Prices</p>
-            <div className="space-y-1">
-              {crypto.map((coin, index) => (
-                <p key={index}>
-                  {coin.name} ({coin.symbol}): {coin.price}{" "}
-                  <span className={coin.change.startsWith("+") ? "text-green-500" : "text-red-500"}>{coin.change}</span>
-                </p>
-              ))}
-            </div>
-            <p className="text-gray-500 text-xs mt-2">Last updated: {new Date().toLocaleString()}</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "news":
-        const news = fetchNewsData()
-        setNewsData(news)
-        output = (
-          <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-            <p className="font-bold text-white mb-2">Latest News</p>
-            <div className="space-y-1">
-              {news.map((item, index) => (
-                <p key={index}>
-                  • {item.title} <span className="text-gray-500">({item.source})</span>
-                </p>
-              ))}
-            </div>
-            <p className="text-gray-500 text-xs mt-2">Last updated: {new Date().toLocaleString()}</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "quote":
-        const quote = fetchQuote()
-        setQuoteData(quote)
-        output = (
-          <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-            <p className="font-bold text-white mb-2">Quote of the Day</p>
-            <p>"{quote.text}"</p>
-            <p className="text-gray-500 text-right">— {quote.author}</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "joke":
-        const joke = fetchJoke()
-        setJokeData(joke)
-        output = (
-          <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-            <p className="font-bold text-white mb-2">Programming Joke</p>
-            <p>{joke}</p>
-            <p className="text-gray-500 text-xs mt-2">😄</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "scan":
-        output = <SecurityScanSection />
-        setCurrentSection("scan")
-        break
-
-      case "matrix":
-        output = (
-          <div className="text-green-500 font-mono">
-            <p>Initializing Matrix sequence...</p>
-            <div className="h-40 overflow-hidden border border-green-800 p-2 bg-black mt-2">
-              <div className="matrix-animation">
-                {Array.from({ length: 10 }).map((_, i) => (
-                  <p key={i} className="matrix-line">
-                    {Array.from({ length: 40 }).map((_, j) => (
-                      <span key={j} className="matrix-char" style={{ animationDelay: `${i * 0.1 + j * 0.05}s` }}>
-                        {String.fromCharCode(33 + Math.floor(Math.random() * 94))}
-                      </span>
-                    ))}
-                  </p>
-                ))}
-              </div>
-            </div>
-            <p className="mt-2">Wake up, Neo...</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "neofetch":
-        output = (
-          <div className="text-green-500 font-mono flex gap-4">
-            <div className="text-blue-500">
-              <pre>
-                {`
-   _______
-  |       |
-  |  ___  |
-  | |   | |
-  | |___| |
-  |_______|
-`}
-              </pre>
-            </div>
-            <div>
-              <p className="text-yellow-500 font-bold">pramesh@portfolio</p>
-              <p>-----------------</p>
-              <p>
-                <span className="text-yellow-500">OS:</span> Portfolio OS 1.0.0
-              </p>
-              <p>
-                <span className="text-yellow-500">Host:</span> Vercel Cloud
-              </p>
-              <p>
-                <span className="text-yellow-500">Kernel:</span> Next.js 14.1.0
-              </p>
-              <p>
-                <span className="text-yellow-500">Uptime:</span> {Math.floor(Math.random() * 100)} days
-              </p>
-              <p>
-                <span className="text-yellow-500">Packages:</span> npm 42
-              </p>
-              <p>
-                <span className="text-yellow-500">Shell:</span> terminal.jsx
-              </p>
-              <p>
-                <span className="text-yellow-500">Resolution:</span> Responsive x Adaptive
-              </p>
-              <p>
-                <span className="text-yellow-500">DE:</span> React 18
-              </p>
-              <p>
-                <span className="text-yellow-500">WM:</span> TailwindCSS
-              </p>
-              <p>
-                <span className="text-yellow-500">Terminal:</span> Portfolio Terminal
-              </p>
-              <p>
-                <span className="text-yellow-500">CPU:</span> JavaScript V8 @ 3.0GHz
-              </p>
-              <p>
-                <span className="text-yellow-500">Memory:</span> 128MB / 512MB
-              </p>
-            </div>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "banner":
-        output = (
-          <div className="text-green-500 font-mono">
-            <pre>
-              {`
-██████╗ ██████╗  █████╗ ███╗   ███╗███████╗███████╗██╗  ██╗
-██╔══██╗██╔══██╗██╔══██╗████╗ ████║██╔════╝██╔════╝██║  ██║
-██████╔╝██████╔╝███████║██╔████╔██║█████╗  ███████╗███████║
-██╔═══╝ ██╔══██╗██╔══██║██║╚██╔╝██║██╔══╝  ╚════██║██╔══██║
-██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗███████║██║  ██║
-╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
-                                                           
-██████╗  █████╗ ███████╗███╗   ██╗███████╗████████╗        
-██╔══██╗██╔══██╗██╔════╝████╗  ██║██╔════╝╚══██╔══╝        
-██████╔╝███████║███████╗██╔██╗ ██║█████╗     ██║           
-██╔══██╗██╔══██║╚════██║██║╚██╗██║██╔══╝     ██║           
-██████╔╝██║  ██║███████║██║ ╚████║███████╗   ██║           
-╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚══════╝   ╚═╝           
-`}
-            </pre>
-            <p className="text-center">Software Developer | Full Stack Engineer</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "fortune":
-        output = (
-          <div className="text-green-500 font-mono border border-green-800 p-2 bg-black/30">
-            <p className="font-bold text-white mb-2">Your Fortune:</p>
-            <p>{getFortune()}</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "calc":
-        if (commandParts.length < 2) {
-          output = <p className="text-red-500 font-mono">calc: Missing expression</p>
-        } else {
-          const expression = commandParts.slice(1).join(" ")
-          const result = calculateExpression(expression)
-          output = (
-            <div className="text-green-500 font-mono">
-              <p>Expression: {expression}</p>
-              <p>Result: {result}</p>
-            </div>
-          )
-        }
-        setCurrentSection(null)
-        break
-
-      case "timer":
-        if (commandParts.length < 2 || isNaN(Number.parseInt(commandParts[1]))) {
-          output = <p className="text-red-500 font-mono">timer: Please specify a valid number of seconds</p>
-        } else {
-          const seconds = Number.parseInt(commandParts[1])
-          if (seconds <= 0 || seconds > 3600) {
-            output = <p className="text-red-500 font-mono">timer: Please specify a time between 1 and 3600 seconds</p>
-          } else {
-            setTimerActive(true)
-            setTimerSeconds(seconds)
+          const file = commandParts[1]
+          if (file === "readme.txt") {
             output = (
               <div className="text-green-500 font-mono">
-                <p>Timer set for {seconds} seconds.</p>
-                <div className="mt-2 p-2 border border-green-800 inline-block">
-                  <span className="font-bold">{seconds}</span> seconds remaining
-                </div>
+                <p>Welcome to Pramesh Basnet's terminal portfolio!</p>
+                <p>Type 'help' to see available commands.</p>
               </div>
             )
+          } else {
+            output = <p className="text-red-500 font-mono">cat: {file}: No such file</p>
           }
         }
-        setCurrentSection(null)
-        break
-
-      case "ascii-art":
-        const ascii = generateAsciiArt()
-        output = (
-          <div className="text-green-500 font-mono">
-            <pre>{ascii}</pre>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "colors":
-        output = showColors()
-        setCurrentSection(null)
-        break
-
-      case "figlet":
-        if (commandParts.length < 2) {
-          output = <p className="text-red-500 font-mono">figlet: Missing text</p>
-        } else {
-          const text = commandParts.slice(1).join(" ")
-          output = (
-            <div className="text-green-500 font-mono">
-              <pre>{figlet(text)}</pre>
-            </div>
-          )
-        }
-        setCurrentSection(null)
-        break
-
-      case "cowsay":
-        const cowText = commandParts.length < 2 ? "Moo!" : commandParts.slice(1).join(" ")
-        output = (
-          <div className="text-green-500 font-mono">
-            <pre>{cowsay(cowText)}</pre>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "calendar":
-        output = (
-          <div className="text-green-500 font-mono">
-            <pre>{showCalendar()}</pre>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "qrcode":
-        if (commandParts.length < 2) {
-          output = <p className="text-red-500 font-mono">qrcode: Missing text</p>
-        } else {
-          const text = commandParts.slice(1).join(" ")
-          output = generateQRCode(text)
-        }
-        setCurrentSection(null)
-        break
-
-      case "morse":
-        if (commandParts.length < 2) {
-          output = <p className="text-red-500 font-mono">morse: Missing text</p>
-        } else {
-          const text = commandParts.slice(1).join(" ")
-          output = (
-            <div className="text-green-500 font-mono">
-              <p>Text: {text}</p>
-              <p>Morse: {textToMorse(text)}</p>
-            </div>
-          )
-        }
-        setCurrentSection(null)
-        break
-
-      case "binary":
-        if (commandParts.length < 2) {
-          output = <p className="text-red-500 font-mono">binary: Missing text</p>
-        } else {
-          const text = commandParts.slice(1).join(" ")
-          output = (
-            <div className="text-green-500 font-mono">
-              <p>Text: {text}</p>
-              <p>Binary: {textToBinary(text)}</p>
-            </div>
-          )
-        }
-        setCurrentSection(null)
-        break
-
-      case "hex":
-        if (commandParts.length < 2) {
-          output = <p className="text-red-500 font-mono">hex: Missing text</p>
-        } else {
-          const text = commandParts.slice(1).join(" ")
-          output = (
-            <div className="text-green-500 font-mono">
-              <p>Text: {text}</p>
-              <p>Hex: {textToHex(text)}</p>
-            </div>
-          )
-        }
-        setCurrentSection(null)
-        break
-
-      case "uuid":
-        output = (
-          <div className="text-green-500 font-mono">
-            <p>Generated UUID:</p>
-            <p className="mt-1 p-2 border border-green-800 bg-black/30">{generateUUID()}</p>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "password":
-        const length =
-          commandParts.length > 1 && !isNaN(Number.parseInt(commandParts[1])) ? Number.parseInt(commandParts[1]) : 12
-
-        output = (
-          <div className="text-green-500 font-mono">
-            <p>Generated Password ({length} characters):</p>
-            <p className="mt-1 p-2 border border-green-800 bg-black/30 font-bold">{generatePassword(length)}</p>
-            <p className="text-xs text-gray-500 mt-2">Copy this password and store it securely.</p>
-          </div>
-        )
         setCurrentSection(null)
         break
 

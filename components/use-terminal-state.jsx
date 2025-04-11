@@ -9,20 +9,8 @@ export function useTerminalState() {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [suggestions, setSuggestions] = useState([])
-  const [weatherData, setWeatherData] = useState(null)
-  const [ipInfo, setIpInfo] = useState(null)
-  const [cryptoData, setCryptoData] = useState(null)
-  const [newsData, setNewsData] = useState(null)
-  const [quoteData, setQuoteData] = useState(null)
-  const [jokeData, setJokeData] = useState(null)
-  const [lastAsciiArt, setLastAsciiArt] = useState(-1)
-  const [lastFortune, setLastFortune] = useState(-1)
-  const [lastQuote, setLastQuote] = useState(-1)
-  const [lastJoke, setLastJoke] = useState(-1)
-  const [timerActive, setTimerActive] = useState(false)
-  const [timerSeconds, setTimerSeconds] = useState(0)
 
-  // New state for file system simulation
+  // File system simulation
   const [currentDirectory, setCurrentDirectory] = useState("/home/pramesh")
   const [fileSystem, setFileSystem] = useState({
     "/": {
@@ -68,30 +56,6 @@ export function useTerminalState() {
     setShowSuggestions,
     suggestions,
     setSuggestions,
-    weatherData,
-    setWeatherData,
-    ipInfo,
-    setIpInfo,
-    cryptoData,
-    setCryptoData,
-    newsData,
-    setNewsData,
-    quoteData,
-    setQuoteData,
-    jokeData,
-    setJokeData,
-    lastAsciiArt,
-    setLastAsciiArt,
-    lastFortune,
-    setLastFortune,
-    lastQuote,
-    setLastQuote,
-    lastJoke,
-    setLastJoke,
-    timerActive,
-    setTimerActive,
-    timerSeconds,
-    setTimerSeconds,
     currentDirectory,
     setCurrentDirectory,
     fileSystem,

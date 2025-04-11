@@ -1,14 +1,7 @@
 "use client"
-
-import { useEffect } from "react"
 import { projectsData } from "../data/projects-data"
 import { commandCategories } from "../data/command-categories"
-import {
-  handlePortfolioCommands,
-  handleSystemCommands,
-  handleToolCommands,
-  handleFileSystemCommands,
-} from "../commands"
+import { handlePortfolioCommands, handleSystemCommands, handleFileSystemCommands } from "../commands"
 
 export function useTerminalCommands({
   input,
@@ -23,40 +16,17 @@ export function useTerminalCommands({
   addToHistory,
 }) {
   // Flatten commands for autocomplete
-  const commands = [
-    ...commandCategories.portfolio,
-    ...commandCategories.system,
-    ...commandCategories.tools,
-    ...commandCategories.fileSystem,
-  ]
+  const commands = [...commandCategories.portfolio, ...commandCategories.system, ...commandCategories.fileSystem]
 
   // Add command aliases
   const commandAliases = {
     ls: "list",
     dir: "list",
     cls: "clear",
-    exit: "logout",
-    quit: "logout",
     "?": "help",
-    time: "date",
     hello: "echo Hello, how can I help you today?",
     hi: "echo Hi there! Type 'help' to see what I can do.",
-    rm: "remove",
-    touch: "create",
-    mkdir: "makedir",
-    mv: "move",
   }
-
-  // Timer effect
-  useEffect(() => {
-    let timerInterval
-
-    return () => {
-      if (timerInterval) {
-        clearInterval(timerInterval)
-      }
-    }
-  }, [])
 
   const handleCommand = (command) => {
     // Check for aliases and replace with actual command
@@ -94,28 +64,20 @@ export function useTerminalCommands({
       if (systemOutput) {
         output = systemOutput
       }
-      // Tool commands
+      // File system commands
       else {
-        const toolOutput = handleToolCommands(command)
+        const fileSystemOutput = handleFileSystemCommands(command)
 
-        if (toolOutput) {
-          output = toolOutput
+        if (fileSystemOutput) {
+          output = fileSystemOutput
         }
-        // File system commands
+        // Unknown command
         else {
-          const fileSystemOutput = handleFileSystemCommands(command)
-
-          if (fileSystemOutput) {
-            output = fileSystemOutput
-          }
-          // Unknown command
-          else {
-            output = (
-              <p className="text-red-500 font-mono">
-                {command.split(" ")[0]}: command not found. Type 'help' to see available commands.
-              </p>
-            )
-          }
+          output = (
+            <p className="text-red-500 font-mono">
+              {command.split(" ")[0]}: command not found. Type 'help' to see available commands.
+            </p>
+          )
         }
       }
     }

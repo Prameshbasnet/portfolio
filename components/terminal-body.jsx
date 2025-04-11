@@ -4,14 +4,15 @@ import { forwardRef } from "react"
 import { ChevronRight } from "lucide-react"
 
 export const TerminalBody = forwardRef(function TerminalBody(
-  { commandHistory, input, showSuggestions, suggestions, applySuggestion, timerActive, timerSeconds, onClick },
+  { commandHistory, input, showSuggestions, suggestions, applySuggestion, onClick },
   ref,
 ) {
   return (
     <div
       ref={ref}
-      className="flex-1 bg-black border-x border-green-800 p-4 overflow-y-auto font-mono text-sm"
+      className="flex-1 bg-black border-x border-green-800 p-4 overflow-y-auto font-mono text-sm terminal-body"
       onClick={onClick}
+      style={{ scrollBehavior: "smooth" }}
     >
       {commandHistory.map((cmd, index) => (
         <div key={index} className="mb-4">
@@ -47,15 +48,6 @@ export const TerminalBody = forwardRef(function TerminalBody(
               </button>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Active timer display */}
-      {timerActive && timerSeconds > 0 && (
-        <div className="mt-4 p-2 border border-green-800 bg-black/30 inline-block">
-          <p className="text-green-500 font-mono">
-            ⏰ Timer: <span className="font-bold">{timerSeconds}</span> seconds remaining
-          </p>
         </div>
       )}
     </div>

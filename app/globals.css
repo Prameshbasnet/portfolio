@@ -33,9 +33,11 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "JetBrains Mono", monospace;
   }
 }
 
+/* Terminal specific styles */
 .cursor-blink {
   animation: blink 1s step-end infinite;
 }
@@ -69,62 +71,46 @@
   }
 }
 
-.matrix-animation {
-  animation: matrix-scroll 10s linear infinite;
+/* Terminal container styles */
+.terminal-container {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.matrix-line {
-  line-height: 1.2;
+/* Terminal body styles */
+.terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 128, 0, 0.5) rgba(0, 0, 0, 0.1);
 }
 
-.matrix-char {
-  animation: matrix-flicker 2s linear infinite;
+.terminal-body::-webkit-scrollbar {
+  width: 8px;
 }
 
-@keyframes matrix-scroll {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
+.terminal-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
 }
 
-@keyframes matrix-flicker {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
+.terminal-body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 128, 0, 0.5);
+  border-radius: 4px;
 }
 
-/* Loading animation */
-.loading-dots {
-  display: inline-flex;
-}
-
-.loading-dots .dot {
-  animation: loading-dots 1.4s infinite;
-  margin-right: 2px;
-  font-size: 20px;
-}
-
-.loading-dots .dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.loading-dots .dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes loading-dots {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
+/* Terminal input styles */
+.terminal-input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: "JetBrains Mono", monospace;
+  outline: none;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  position: absolute;
 }
